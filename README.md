@@ -1,5 +1,7 @@
 # decomotor
-Unsupervised Bayesian Ising Approximation for decoding neural-motor dictionaries. Here we present the code inrelation to the paper ... .It presents a method for decoding neural activity in relation to motor behavior, expanding on the approach BIA by Fisher and Mehta (2015).
+Unsupervised Bayesian Ising Approximation for decoding neural-motor dictionaries. Here we present the code corresponding to the paper:
+<-to be completed->
+The code in this repository follows a method for decoding neural activity in relation to motor behavior, expanding on the approach BIA by Fisher and Mehta (2015).
 
 ## Getting Started
 
@@ -7,7 +9,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+Tha main code of this project is written in Mathematica v10 (and tested on v11, as well).
+
+The repository contains a demo in a jupyter notebook (python).
 
 ```
 Give examples
@@ -17,10 +21,9 @@ Give examples
 
 A step by step series of examples that tell you how to get a development env running
 
-Say what the step will be
-
+As a first step, we need to create the scripts in our local Mathematica, in order to be sure that they will run properly:
 ```
-Give the example
+math creating_scripts.m
 ```
 
 And repeat
