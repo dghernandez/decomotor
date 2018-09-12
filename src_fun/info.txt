@@ -1,0 +1,2 @@
+This folder hosts the script to create the mx files for the functions (later used by main programs).
+It also includes Mathematica notebooks withthe contents of each function.
