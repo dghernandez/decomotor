@@ -1,0 +1,2 @@
+Folder for mx files for functions.
+This may need to be created again with your installed version of Mathematica (running "math -script create_all_functions.m").
