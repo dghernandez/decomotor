@@ -1,6 +1,7 @@
 # decomotor
 Unsupervised Bayesian Ising Approximation for decoding neural-motor dictionaries. Here we present the code corresponding to the paper:
 <-to be completed->
+
 The code in this repository follows a method for decoding neural activity in relation to motor behavior, expanding on the approach BIA by Fisher and Mehta (2015).
 
 ## Getting Started
