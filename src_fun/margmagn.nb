@@ -1,0 +1,252 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      9185,        244]
+NotebookOptionsPosition[      8842,        227]
+NotebookOutlinePosition[      9176,        242]
+CellTagsIndexPosition[      9133,        239]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"mi", ":", " ", 
+     RowBox[{
+     "marginal", " ", "magnetization", " ", "as", " ", "a", " ", "function", 
+      " ", "of", " ", "epsilon"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"h1ef", ":", " ", 
+     RowBox[{
+     "epsilon", " ", "correction", " ", "to", " ", "h0", " ", "as", " ", "a", 
+      " ", "function", " ", "of", " ", "epsilon", "\[IndentingNewLine]", 
+      RowBox[{"(", 
+       RowBox[{"to", " ", "later", " ", "decide", " ", "eopt", " ", "as", " ", 
+        RowBox[{
+         RowBox[{"Mean", "[", 
+          RowBox[{"|", "h0", "|"}], "]"}], "~", 
+         RowBox[{"Mean", "[", 
+          RowBox[{"|", "h1ef", "|"}], "]"}]}]}], ")"}]}]}]}], 
+   "\[IndentingNewLine]", "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"margmagn", "[", 
+    RowBox[{"M_", ",", "h1_", ",", "hef_", ",", "Jvw_", ",", 
+     RowBox[{"emax_:", "1."}], ",", 
+     RowBox[{"ne_:", "20"}]}], "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "mi", ",", "h1ef", ",", "de", ",", "Nm1", ",", "e", ",", "JvwT"}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"JvwT", "=", 
+        RowBox[{"Transpose", "[", "Jvw", "]"}]}], ";", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Nm1", "=", 
+        RowBox[{"Length", " ", "@", "h1"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"de", "=", 
+        RowBox[{"emax", "/", 
+         RowBox[{"(", 
+          RowBox[{"M", " ", "ne"}], ")"}]}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"mi", "=", 
+        RowBox[{"ConstantArray", "[", 
+         RowBox[{"0.", ",", 
+          RowBox[{"{", 
+           RowBox[{"Nm1", ",", 
+            RowBox[{"ne", "+", "1"}]}], "}"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"h1ef", "=", 
+        RowBox[{"ConstantArray", "[", 
+         RowBox[{"0.", ",", 
+          RowBox[{"{", 
+           RowBox[{"Nm1", ",", 
+            RowBox[{"ne", "+", "1"}]}], "}"}]}], "]"}]}], ";", 
+       RowBox[{"Do", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"h1ef", "[", 
+           RowBox[{"[", 
+            RowBox[{"v", ",", "1"}], "]"}], "]"}], "=", 
+          RowBox[{"h1", "[", 
+           RowBox[{"[", 
+            RowBox[{"v", ",", "1"}], "]"}], "]"}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"v", ",", "Nm1"}], "}"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"Do", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"e", "=", 
+           RowBox[{"de", " ", 
+            RowBox[{"(", 
+             RowBox[{"t", "-", "1."}], ")"}]}]}], ";", "\[IndentingNewLine]", 
+          
+          RowBox[{"Do", "[", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{"t", "\[Equal]", "1"}], ",", "\[IndentingNewLine]", 
+               "\t", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"h1ef", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"v", ",", 
+                    RowBox[{"t", "+", "1"}]}], "]"}], "]"}], "=", 
+                 RowBox[{
+                  RowBox[{"h1", "[", 
+                   RowBox[{"[", 
+                    RowBox[{"v", ",", "1"}], "]"}], "]"}], "+", 
+                  RowBox[{"2.", " ", 
+                   RowBox[{"(", 
+                    RowBox[{"e", "+", "de"}], ")"}], 
+                   RowBox[{"hef", "[", 
+                    RowBox[{"[", "v", "]"}], "]"}]}]}]}], ";", 
+                "\[IndentingNewLine]", "\t", 
+                RowBox[{
+                 RowBox[{"mi", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"v", ",", 
+                    RowBox[{"t", "+", "1"}]}], "]"}], "]"}], "=", " ", 
+                 RowBox[{"Tanh", "[", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"e", "+", "de"}], ")"}], 
+                   RowBox[{"h1ef", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"v", ",", 
+                    RowBox[{"t", "+", "1"}]}], "]"}], "]"}]}], 
+                  RowBox[{"(*", 
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"h1", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"v", ",", "1"}], "]"}], "]"}], "+", 
+                    RowBox[{"2.", " ", 
+                    RowBox[{"(", 
+                    RowBox[{"e", "+", "de"}], ")"}], 
+                    RowBox[{"hef", "[", 
+                    RowBox[{"[", "v", "]"}], "]"}]}]}], ")"}], "*)"}], 
+                  "]"}]}], ";"}], "\[IndentingNewLine]", "\t", ",", 
+               "\[IndentingNewLine]", "\t", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"h1ef", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"v", ",", 
+                    RowBox[{"t", "+", "1"}]}], "]"}], "]"}], "=", " ", 
+                 RowBox[{
+                  RowBox[{"h1", "[", 
+                   RowBox[{"[", 
+                    RowBox[{"v", ",", "1"}], "]"}], "]"}], "+", 
+                  RowBox[{"2.", " ", 
+                   RowBox[{"(", 
+                    RowBox[{"e", "+", "de"}], ")"}], 
+                   RowBox[{"hef", "[", 
+                    RowBox[{"[", "v", "]"}], "]"}]}], "+", 
+                  RowBox[{"1.", 
+                   RowBox[{"(", 
+                    RowBox[{"e", "+", "de"}], ")"}], 
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Jvw", "[", 
+                    RowBox[{"[", "v", "]"}], "]"}], ".", 
+                    RowBox[{"mi", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"All", ",", "t"}], "]"}], "]"}]}], "+", 
+                    RowBox[{
+                    RowBox[{"JvwT", "[", 
+                    RowBox[{"[", "v", "]"}], "]"}], ".", 
+                    RowBox[{"mi", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"All", ",", "t"}], "]"}], "]"}]}]}], ")"}]}]}]}], 
+                ";", "\[IndentingNewLine]", "\t", 
+                RowBox[{
+                 RowBox[{"mi", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"v", ",", 
+                    RowBox[{"t", "+", "1"}]}], "]"}], "]"}], "=", " ", 
+                 RowBox[{"Tanh", "[", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"e", "+", "de"}], ")"}], 
+                   RowBox[{"h1ef", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"v", ",", 
+                    RowBox[{"t", "+", "1"}]}], "]"}], "]"}]}], "]"}]}], 
+                ";"}]}], "\[IndentingNewLine]", "]"}], ";"}], 
+            "\[IndentingNewLine]", ",", 
+            RowBox[{"{", 
+             RowBox[{"v", ",", "1", ",", "Nm1"}], "}"}]}], "]"}], ";"}], 
+         "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{"Print", "[", "t", "]"}], "*)"}], "\[IndentingNewLine]", 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", "1", ",", "ne"}], "}"}]}], "]"}], ";"}], 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", ";", 
+      RowBox[{"{", 
+       RowBox[{"mi", ",", "h1ef"}], "}"}]}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.685034977287833*^9, 3.685035037591785*^9}, {
+   3.6850350767606773`*^9, 3.685035152643712*^9}, {3.685035185020235*^9, 
+   3.685035314781621*^9}, {3.685035409994041*^9, 3.685035576369198*^9}, 
+   3.685035934482813*^9, {3.69940197413085*^9, 3.699401976440918*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DumpSave", "[", 
+  RowBox[{
+  "\"\<ownCloud/EMORY/bia_j/CODE/scripts/margmagn.mx\>\"", ",", "margmagn"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.6850356027512617`*^9, 3.685035629997237*^9}, 
+   3.685468567373147*^9, {3.69940083100139*^9, 3.69940083778181*^9}, {
+   3.745681154503138*^9, 3.745681157175055*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", "margmagn", "}"}]], "Output",
+ CellChangeTimes->{3.685035632328684*^9, 3.68503596996922*^9, 
+  3.685468569048996*^9, 3.699400840824966*^9, 3.699401983898878*^9, 
+  3.7304824756568213`*^9, 3.745681158167371*^9}]
+}, Open  ]]
+},
+WindowSize->{1853, 1025},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.0 for Linux x86 (64-bit) (June 27, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 7665, 187, 694, "Input"],
+Cell[CellGroupData[{
+Cell[8248, 211, 337, 7, 32, "Input"],
+Cell[8588, 220, 238, 4, 65, "Output"]
+}, Open  ]]
+}
+]
+*)
+

@@ -1,0 +1,1314 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     55627,       1306]
+NotebookOptionsPosition[     55273,       1289]
+NotebookOutlinePosition[     55609,       1304]
+CellTagsIndexPosition[     55566,       1301]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"ftab4", "[", 
+    RowBox[{"a_", ",", 
+     RowBox[{"pae_:", "0"}], ",", 
+     RowBox[{"hl_:", "1"}], ",", 
+     RowBox[{"dir_:", "\"\<ownCloud/EMORY/bia_j/CODE/dataset/\>\""}]}], "]"}],
+    ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "tab", ",", "T0", ",", "T", ",", "lis", ",", "v1", ",", "st", ",", 
+       "dat", ",", "sdat", ",", "pi", ",", "mpi", ",", "bpi", ",", "M", ",", 
+       "q10", ",", "q20", ",", "q30", ",", "q40", ",", "q50", ",", "q60", ",",
+        "q70", ",", "q80", ",", "q90", ",", "q35", ",", "q65", ",", "q33", 
+       ",", "q66"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"T0", "=", "40"}], ";", 
+       RowBox[{"T", "=", "21"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"lis", "=", 
+        RowBox[{
+         RowBox[{"Import", "[", 
+          RowBox[{
+           RowBox[{"dir", "<>", "\"\<list_files.txt\>\""}], ",", 
+           "\"\<Table\>\""}], "]"}], "//", "Flatten"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"dat", "=", 
+        RowBox[{"Quiet", "[", 
+         RowBox[{"Import", "[", 
+          RowBox[{
+           RowBox[{"dir", "<>", 
+            RowBox[{"ToString", "[", 
+             RowBox[{"lis", "[", 
+              RowBox[{"[", "a", "]"}], "]"}], "]"}]}], ",", 
+           "\"\<LabeledData\>\""}], "]"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"M", "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"\"\<number_of_trials\>\"", "/.", "dat"}], ")"}], "[", 
+          RowBox[{"[", 
+           RowBox[{"1", ",", "1"}], "]"}], "]"}], " ", "//", "Floor"}]}], ";",
+        "\[IndentingNewLine]", 
+       RowBox[{"sdat", "=", 
+        RowBox[{"\"\<spiketrains\>\"", "/.", "dat"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+         RowBox[{"sdat", "=", 
+          RowBox[{"sdat", " ", "/.", " ", 
+           RowBox[{
+            RowBox[{"Transpose", "[", 
+             RowBox[{"Partition", "[", 
+              RowBox[{
+               RowBox[{"{", "}"}], ",", "0.`"}], "]"}], "]"}], "\[Rule]", " ", 
+            RowBox[{"{", 
+             RowBox[{"{", "}"}], "}"}]}]}]}], ";"}], "*)"}], 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"tab", "=", 
+        RowBox[{"ConstantArray", "[", 
+         RowBox[{"0", ",", 
+          RowBox[{"{", 
+           RowBox[{"M", ",", 
+            RowBox[{"T", "-", "1"}]}], "}"}]}], "]"}]}], ";", 
+       RowBox[{"st", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"Quiet", "[", 
+        RowBox[{
+         RowBox[{"Do", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"sdat", "[", 
+                RowBox[{"[", 
+                 RowBox[{"3", ",", "1", ",", "i", ",", "1"}], "]"}], "]"}], 
+               "\[NotEqual]", 
+               RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+              "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"v1", "=", 
+                RowBox[{"Ceiling", "[", 
+                 RowBox[{
+                  RowBox[{"sdat", "[", 
+                   RowBox[{"[", 
+                    RowBox[{"3", ",", "1", ",", "i", ",", "1", ",", "1"}], 
+                    "]"}], "]"}], "*", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"T", "-", "1"}], ")"}], "/", "T0"}]}], "]"}]}], 
+               ";", "\[IndentingNewLine]", 
+               RowBox[{"st", "=", 
+                RowBox[{"st", "~", "Join", "~", 
+                 RowBox[{"{", "v1", "}"}]}]}], ";", "\[IndentingNewLine]", 
+               RowBox[{"Do", "[", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"tab", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", 
+                    RowBox[{"v1", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}]}], " ", "]"}], "]"}], "=", 
+                   "1"}], ";"}], "\[IndentingNewLine]", ",", 
+                 RowBox[{"{", 
+                  RowBox[{"j", ",", 
+                   RowBox[{"Length", "[", "v1", "]"}]}], "}"}]}], "]"}]}]}], 
+             "\[IndentingNewLine]", "\[IndentingNewLine]", "]"}], ";"}], 
+           "\[IndentingNewLine]", ",", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", "M"}], "}"}]}], "]"}], ";"}], "]"}], ";", 
+       RowBox[{"(*", 
+        RowBox[{"//", "Timing"}], "*)"}], "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+         RowBox[{"pae", ":", " ", 
+          RowBox[{"0", " ", "pitch"}]}], ",", " ", 
+         RowBox[{"1", " ", "amplitude"}], ",", " ", 
+         RowBox[{"2", " ", "entropy"}]}], "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"hl", ":", " ", "1"}], "=", 
+          RowBox[{"1", " ", "high"}]}], ",", " ", 
+         RowBox[{"0", "=", 
+          RowBox[{"0", " ", "high"}]}]}], "*)"}], "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"for", " ", "pae"}], "=", 
+          RowBox[{"-", "1"}]}], ",", " ", 
+         RowBox[{"we", " ", 
+          RowBox[{"don", "'"}], "t", " ", "include", " ", "vocal", " ", 
+          "feature"}], ",", " ", 
+         RowBox[{"just", " ", "marginal", " ", "activity"}]}], "*)"}], 
+       "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"pae", "\[NotEqual]", " ", 
+          RowBox[{"-", "1"}]}], ",", "\[IndentingNewLine]", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"Which", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"pae", "\[Equal]", "0"}], "||", 
+             RowBox[{"pae", "\[Equal]", "1"}], "||", 
+             RowBox[{"pae", "\[Equal]", "2"}]}], ",", 
+            RowBox[{"(*", 
+             RowBox[{"median", ",", " ", "q50"}], "*)"}], 
+            "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"pi", "=", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"\"\<acoustic_data\>\"", "/.", "dat"}], ")"}], "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"pae", "+", "1"}], ",", "1", ",", "1", ",", "1", ",",
+                  "1"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"mpi", "=", 
+              RowBox[{"Median", "[", "pi", "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"bpi", "=", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ">", "mpi"}], ",", "hl", 
+                  ",", 
+                  RowBox[{"1", "-", "hl"}]}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", 
+                  RowBox[{"Length", "[", "pi", "]"}]}], "}"}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"hl", ":", " ", "1"}], "=", 
+                RowBox[{"1", " ", "high"}]}], ",", " ", 
+               RowBox[{"0", "=", 
+                RowBox[{"0", " ", "high"}]}]}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"tab", "=", 
+              RowBox[{"Join", "[", 
+               RowBox[{
+                RowBox[{"Transpose", "[", 
+                 RowBox[{"{", "bpi", "}"}], "]"}], ",", "tab", ",", "2"}], 
+               "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            ",", 
+            RowBox[{
+             RowBox[{"pae", "\[Equal]", "10"}], "||", 
+             RowBox[{"pae", "\[Equal]", "11"}], "||", 
+             RowBox[{"pae", "\[Equal]", "12"}]}], ",", 
+            RowBox[{"(*", 
+             RowBox[{"outside", " ", "[", 
+              RowBox[{"q15", ",", "q85"}], "]"}], "*)"}], 
+            "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"pi", "=", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"\"\<acoustic_data\>\"", "/.", "dat"}], ")"}], "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"pae", "-", "10", "+", "1"}], ",", "1", ",", "1", 
+                 ",", "1", ",", "1"}], "]"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+               "q20", ",", "q40", ",", "q50", ",", "q60", ",", "q80"}], "}"}],
+               "=", 
+              RowBox[{"Quantile", "[", 
+               RowBox[{"pi", ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                 "0.20", ",", "0.40", ",", "0.5", ",", "0.60", ",", "0.80"}], 
+                 "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"bpi", "=", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "<", "q20"}], "||", 
+                   RowBox[{
+                    RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ">", "q80"}]}], ",", "hl",
+                   ",", 
+                  RowBox[{"1", "-", "hl"}]}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", 
+                  RowBox[{"Length", "[", "pi", "]"}]}], "}"}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"hl", ":", " ", "1"}], "=", 
+                RowBox[{"1", " ", "high"}]}], ",", " ", 
+               RowBox[{"0", "=", 
+                RowBox[{"0", " ", "high"}]}]}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"tab", "=", 
+              RowBox[{"Join", "[", 
+               RowBox[{
+                RowBox[{"Transpose", "[", 
+                 RowBox[{"{", "bpi", "}"}], "]"}], ",", "tab", ",", "2"}], 
+               "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            ",", 
+            RowBox[{
+             RowBox[{"pae", "\[Equal]", "20"}], "||", 
+             RowBox[{"pae", "\[Equal]", "21"}], "||", 
+             RowBox[{"pae", "\[Equal]", "22"}]}], ",", 
+            RowBox[{"(*", 
+             RowBox[{"above", " ", "q60"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"pi", "=", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"\"\<acoustic_data\>\"", "/.", "dat"}], ")"}], "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"pae", "-", "20", "+", "1"}], ",", "1", ",", "1", 
+                 ",", "1", ",", "1"}], "]"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+               "q20", ",", "q40", ",", "q50", ",", "q60", ",", "q80"}], "}"}],
+               "=", 
+              RowBox[{"Quantile", "[", 
+               RowBox[{"pi", ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                 "0.20", ",", "0.40", ",", "0.5", ",", "0.60", ",", "0.80"}], 
+                 "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"bpi", "=", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ">", "q60"}], ",", "hl", 
+                  ",", 
+                  RowBox[{"1", "-", "hl"}]}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", 
+                  RowBox[{"Length", "[", "pi", "]"}]}], "}"}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"hl", ":", " ", "1"}], "=", 
+                RowBox[{"1", " ", "high"}]}], ",", " ", 
+               RowBox[{"0", "=", 
+                RowBox[{"0", " ", "high"}]}]}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"tab", "=", 
+              RowBox[{"Join", "[", 
+               RowBox[{
+                RowBox[{"Transpose", "[", 
+                 RowBox[{"{", "bpi", "}"}], "]"}], ",", "tab", ",", "2"}], 
+               "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            ",", 
+            RowBox[{
+             RowBox[{"pae", "\[Equal]", "30"}], "||", 
+             RowBox[{"pae", "\[Equal]", "31"}], "||", 
+             RowBox[{"pae", "\[Equal]", "32"}]}], ",", 
+            RowBox[{"(*", 
+             RowBox[{"below", " ", "q40"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"pi", "=", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"\"\<acoustic_data\>\"", "/.", "dat"}], ")"}], "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"pae", "-", "30", "+", "1"}], ",", "1", ",", "1", 
+                 ",", "1", ",", "1"}], "]"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+               "q20", ",", "q40", ",", "q50", ",", "q60", ",", "q80"}], "}"}],
+               "=", 
+              RowBox[{"Quantile", "[", 
+               RowBox[{"pi", ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                 "0.20", ",", "0.40", ",", "0.5", ",", "0.60", ",", "0.80"}], 
+                 "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"bpi", "=", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "<", "q40"}], ",", "hl", 
+                  ",", 
+                  RowBox[{"1", "-", "hl"}]}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", 
+                  RowBox[{"Length", "[", "pi", "]"}]}], "}"}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"hl", ":", " ", "1"}], "=", 
+                RowBox[{"1", " ", "high"}]}], ",", " ", 
+               RowBox[{"0", "=", 
+                RowBox[{"0", " ", "high"}]}]}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"tab", "=", 
+              RowBox[{"Join", "[", 
+               RowBox[{
+                RowBox[{"Transpose", "[", 
+                 RowBox[{"{", "bpi", "}"}], "]"}], ",", "tab", ",", "2"}], 
+               "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            ",", 
+            RowBox[{
+             RowBox[{"pae", "\[Equal]", "40"}], "||", 
+             RowBox[{"pae", "\[Equal]", "41"}], "||", 
+             RowBox[{"pae", "\[Equal]", "42"}]}], ",", 
+            RowBox[{"(*", 
+             RowBox[{"q0", "-", "q20"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"pi", "=", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"\"\<acoustic_data\>\"", "/.", "dat"}], ")"}], "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"pae", "-", "40", "+", "1"}], ",", "1", ",", "1", 
+                 ",", "1", ",", "1"}], "]"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+               "q10", ",", "q20", ",", "q30", ",", "q40", ",", "q50", ",", 
+                "q60", ",", "q70", ",", "q80", ",", "q90"}], "}"}], "=", 
+              RowBox[{"Quantile", "[", 
+               RowBox[{"pi", ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                 "0.1", ",", "0.2", ",", "0.3", ",", "0.4", ",", "0.5", ",", 
+                  "0.6", ",", "0.7", ",", "0.8", ",", "0.9"}], "}"}]}], 
+               "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"bpi", "=", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "<", "q20"}], ",", "hl", 
+                  ",", 
+                  RowBox[{"1", "-", "hl"}]}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", 
+                  RowBox[{"Length", "[", "pi", "]"}]}], "}"}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"hl", ":", " ", "1"}], "=", 
+                RowBox[{"1", " ", "high"}]}], ",", " ", 
+               RowBox[{"0", "=", 
+                RowBox[{"0", " ", "high"}]}]}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"tab", "=", 
+              RowBox[{"Join", "[", 
+               RowBox[{
+                RowBox[{"Transpose", "[", 
+                 RowBox[{"{", "bpi", "}"}], "]"}], ",", "tab", ",", "2"}], 
+               "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            ",", 
+            RowBox[{
+             RowBox[{"pae", "\[Equal]", "50"}], "||", 
+             RowBox[{"pae", "\[Equal]", "51"}], "||", 
+             RowBox[{"pae", "\[Equal]", "52"}]}], ",", 
+            RowBox[{"(*", 
+             RowBox[{"q10", "-", "q30"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"pi", "=", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"\"\<acoustic_data\>\"", "/.", "dat"}], ")"}], "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"pae", "-", "50", "+", "1"}], ",", "1", ",", "1", 
+                 ",", "1", ",", "1"}], "]"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+               "q10", ",", "q20", ",", "q30", ",", "q40", ",", "q50", ",", 
+                "q60", ",", "q70", ",", "q80", ",", "q90"}], "}"}], "=", 
+              RowBox[{"Quantile", "[", 
+               RowBox[{"pi", ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                 "0.1", ",", "0.2", ",", "0.3", ",", "0.4", ",", "0.5", ",", 
+                  "0.6", ",", "0.7", ",", "0.8", ",", "0.9"}], "}"}]}], 
+               "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"bpi", "=", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ">", "q10"}], "&&", 
+                   RowBox[{
+                    RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "<", "q30"}]}], ",", "hl",
+                   ",", 
+                  RowBox[{"1", "-", "hl"}]}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", 
+                  RowBox[{"Length", "[", "pi", "]"}]}], "}"}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"hl", ":", " ", "1"}], "=", 
+                RowBox[{"1", " ", "high"}]}], ",", " ", 
+               RowBox[{"0", "=", 
+                RowBox[{"0", " ", "high"}]}]}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"tab", "=", 
+              RowBox[{"Join", "[", 
+               RowBox[{
+                RowBox[{"Transpose", "[", 
+                 RowBox[{"{", "bpi", "}"}], "]"}], ",", "tab", ",", "2"}], 
+               "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            ",", 
+            RowBox[{
+             RowBox[{"pae", "\[Equal]", "60"}], "||", 
+             RowBox[{"pae", "\[Equal]", "61"}], "||", 
+             RowBox[{"pae", "\[Equal]", "62"}]}], ",", 
+            RowBox[{"(*", 
+             RowBox[{"q20", "-", "q40"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"pi", "=", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"\"\<acoustic_data\>\"", "/.", "dat"}], ")"}], "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"pae", "-", "60", "+", "1"}], ",", "1", ",", "1", 
+                 ",", "1", ",", "1"}], "]"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+               "q10", ",", "q20", ",", "q30", ",", "q40", ",", "q50", ",", 
+                "q60", ",", "q70", ",", "q80", ",", "q90"}], "}"}], "=", 
+              RowBox[{"Quantile", "[", 
+               RowBox[{"pi", ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                 "0.1", ",", "0.2", ",", "0.3", ",", "0.4", ",", "0.5", ",", 
+                  "0.6", ",", "0.7", ",", "0.8", ",", "0.9"}], "}"}]}], 
+               "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"bpi", "=", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ">", "q20"}], "&&", 
+                   RowBox[{
+                    RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "<", "q40"}]}], ",", "hl",
+                   ",", 
+                  RowBox[{"1", "-", "hl"}]}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", 
+                  RowBox[{"Length", "[", "pi", "]"}]}], "}"}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"hl", ":", " ", "1"}], "=", 
+                RowBox[{"1", " ", "high"}]}], ",", " ", 
+               RowBox[{"0", "=", 
+                RowBox[{"0", " ", "high"}]}]}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"tab", "=", 
+              RowBox[{"Join", "[", 
+               RowBox[{
+                RowBox[{"Transpose", "[", 
+                 RowBox[{"{", "bpi", "}"}], "]"}], ",", "tab", ",", "2"}], 
+               "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            ",", 
+            RowBox[{
+             RowBox[{"pae", "\[Equal]", "70"}], "||", 
+             RowBox[{"pae", "\[Equal]", "71"}], "||", 
+             RowBox[{"pae", "\[Equal]", "72"}]}], ",", 
+            RowBox[{"(*", 
+             RowBox[{"q30", "-", "q50"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"pi", "=", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"\"\<acoustic_data\>\"", "/.", "dat"}], ")"}], "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"pae", "-", "70", "+", "1"}], ",", "1", ",", "1", 
+                 ",", "1", ",", "1"}], "]"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+               "q10", ",", "q20", ",", "q30", ",", "q40", ",", "q50", ",", 
+                "q60", ",", "q70", ",", "q80", ",", "q90"}], "}"}], "=", 
+              RowBox[{"Quantile", "[", 
+               RowBox[{"pi", ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                 "0.1", ",", "0.2", ",", "0.3", ",", "0.4", ",", "0.5", ",", 
+                  "0.6", ",", "0.7", ",", "0.8", ",", "0.9"}], "}"}]}], 
+               "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"bpi", "=", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ">", "q30"}], "&&", 
+                   RowBox[{
+                    RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "<", "q50"}]}], ",", "hl",
+                   ",", 
+                  RowBox[{"1", "-", "hl"}]}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", 
+                  RowBox[{"Length", "[", "pi", "]"}]}], "}"}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"hl", ":", " ", "1"}], "=", 
+                RowBox[{"1", " ", "high"}]}], ",", " ", 
+               RowBox[{"0", "=", 
+                RowBox[{"0", " ", "high"}]}]}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"tab", "=", 
+              RowBox[{"Join", "[", 
+               RowBox[{
+                RowBox[{"Transpose", "[", 
+                 RowBox[{"{", "bpi", "}"}], "]"}], ",", "tab", ",", "2"}], 
+               "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            ",", 
+            RowBox[{
+             RowBox[{"pae", "\[Equal]", "80"}], "||", 
+             RowBox[{"pae", "\[Equal]", "81"}], "||", 
+             RowBox[{"pae", "\[Equal]", "82"}]}], ",", 
+            RowBox[{"(*", 
+             RowBox[{"q40", "-", "q60"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"pi", "=", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"\"\<acoustic_data\>\"", "/.", "dat"}], ")"}], "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"pae", "-", "80", "+", "1"}], ",", "1", ",", "1", 
+                 ",", "1", ",", "1"}], "]"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+               "q10", ",", "q20", ",", "q30", ",", "q40", ",", "q50", ",", 
+                "q60", ",", "q70", ",", "q80", ",", "q90"}], "}"}], "=", 
+              RowBox[{"Quantile", "[", 
+               RowBox[{"pi", ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                 "0.1", ",", "0.2", ",", "0.3", ",", "0.4", ",", "0.5", ",", 
+                  "0.6", ",", "0.7", ",", "0.8", ",", "0.9"}], "}"}]}], 
+               "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"bpi", "=", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ">", "q40"}], "&&", 
+                   RowBox[{
+                    RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "<", "q60"}]}], ",", "hl",
+                   ",", 
+                  RowBox[{"1", "-", "hl"}]}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", 
+                  RowBox[{"Length", "[", "pi", "]"}]}], "}"}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"hl", ":", " ", "1"}], "=", 
+                RowBox[{"1", " ", "high"}]}], ",", " ", 
+               RowBox[{"0", "=", 
+                RowBox[{"0", " ", "high"}]}]}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"tab", "=", 
+              RowBox[{"Join", "[", 
+               RowBox[{
+                RowBox[{"Transpose", "[", 
+                 RowBox[{"{", "bpi", "}"}], "]"}], ",", "tab", ",", "2"}], 
+               "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            ",", 
+            RowBox[{
+             RowBox[{"pae", "\[Equal]", "90"}], "||", 
+             RowBox[{"pae", "\[Equal]", "91"}], "||", 
+             RowBox[{"pae", "\[Equal]", "92"}]}], ",", 
+            RowBox[{"(*", 
+             RowBox[{"q50", "-", "q70"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"pi", "=", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"\"\<acoustic_data\>\"", "/.", "dat"}], ")"}], "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"pae", "-", "90", "+", "1"}], ",", "1", ",", "1", 
+                 ",", "1", ",", "1"}], "]"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+               "q10", ",", "q20", ",", "q30", ",", "q40", ",", "q50", ",", 
+                "q60", ",", "q70", ",", "q80", ",", "q90"}], "}"}], "=", 
+              RowBox[{"Quantile", "[", 
+               RowBox[{"pi", ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                 "0.1", ",", "0.2", ",", "0.3", ",", "0.4", ",", "0.5", ",", 
+                  "0.6", ",", "0.7", ",", "0.8", ",", "0.9"}], "}"}]}], 
+               "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"bpi", "=", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ">", "q50"}], "&&", 
+                   RowBox[{
+                    RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "<", "q70"}]}], ",", "hl",
+                   ",", 
+                  RowBox[{"1", "-", "hl"}]}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", 
+                  RowBox[{"Length", "[", "pi", "]"}]}], "}"}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"hl", ":", " ", "1"}], "=", 
+                RowBox[{"1", " ", "high"}]}], ",", " ", 
+               RowBox[{"0", "=", 
+                RowBox[{"0", " ", "high"}]}]}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"tab", "=", 
+              RowBox[{"Join", "[", 
+               RowBox[{
+                RowBox[{"Transpose", "[", 
+                 RowBox[{"{", "bpi", "}"}], "]"}], ",", "tab", ",", "2"}], 
+               "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            ",", 
+            RowBox[{
+             RowBox[{"pae", "\[Equal]", "100"}], "||", 
+             RowBox[{"pae", "\[Equal]", "101"}], "||", 
+             RowBox[{"pae", "\[Equal]", "102"}]}], ",", 
+            RowBox[{"(*", 
+             RowBox[{"q60", "-", "q80"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"pi", "=", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"\"\<acoustic_data\>\"", "/.", "dat"}], ")"}], "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"pae", "-", "100", "+", "1"}], ",", "1", ",", "1", 
+                 ",", "1", ",", "1"}], "]"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+               "q10", ",", "q20", ",", "q30", ",", "q40", ",", "q50", ",", 
+                "q60", ",", "q70", ",", "q80", ",", "q90"}], "}"}], "=", 
+              RowBox[{"Quantile", "[", 
+               RowBox[{"pi", ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                 "0.1", ",", "0.2", ",", "0.3", ",", "0.4", ",", "0.5", ",", 
+                  "0.6", ",", "0.7", ",", "0.8", ",", "0.9"}], "}"}]}], 
+               "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"bpi", "=", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ">", "q60"}], "&&", 
+                   RowBox[{
+                    RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "<", "q80"}]}], ",", "hl",
+                   ",", 
+                  RowBox[{"1", "-", "hl"}]}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", 
+                  RowBox[{"Length", "[", "pi", "]"}]}], "}"}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"hl", ":", " ", "1"}], "=", 
+                RowBox[{"1", " ", "high"}]}], ",", " ", 
+               RowBox[{"0", "=", 
+                RowBox[{"0", " ", "high"}]}]}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"tab", "=", 
+              RowBox[{"Join", "[", 
+               RowBox[{
+                RowBox[{"Transpose", "[", 
+                 RowBox[{"{", "bpi", "}"}], "]"}], ",", "tab", ",", "2"}], 
+               "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            ",", 
+            RowBox[{
+             RowBox[{"pae", "\[Equal]", "110"}], "||", 
+             RowBox[{"pae", "\[Equal]", "111"}], "||", 
+             RowBox[{"pae", "\[Equal]", "112"}]}], ",", 
+            RowBox[{"(*", 
+             RowBox[{"q70", "-", "q90"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"pi", "=", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"\"\<acoustic_data\>\"", "/.", "dat"}], ")"}], "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"pae", "-", "110", "+", "1"}], ",", "1", ",", "1", 
+                 ",", "1", ",", "1"}], "]"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+               "q10", ",", "q20", ",", "q30", ",", "q40", ",", "q50", ",", 
+                "q60", ",", "q70", ",", "q80", ",", "q90"}], "}"}], "=", 
+              RowBox[{"Quantile", "[", 
+               RowBox[{"pi", ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                 "0.1", ",", "0.2", ",", "0.3", ",", "0.4", ",", "0.5", ",", 
+                  "0.6", ",", "0.7", ",", "0.8", ",", "0.9"}], "}"}]}], 
+               "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"bpi", "=", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ">", "q70"}], "&&", 
+                   RowBox[{
+                    RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "<", "q90"}]}], ",", "hl",
+                   ",", 
+                  RowBox[{"1", "-", "hl"}]}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", 
+                  RowBox[{"Length", "[", "pi", "]"}]}], "}"}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"hl", ":", " ", "1"}], "=", 
+                RowBox[{"1", " ", "high"}]}], ",", " ", 
+               RowBox[{"0", "=", 
+                RowBox[{"0", " ", "high"}]}]}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"tab", "=", 
+              RowBox[{"Join", "[", 
+               RowBox[{
+                RowBox[{"Transpose", "[", 
+                 RowBox[{"{", "bpi", "}"}], "]"}], ",", "tab", ",", "2"}], 
+               "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            ",", 
+            RowBox[{
+             RowBox[{"pae", "\[Equal]", "120"}], "||", 
+             RowBox[{"pae", "\[Equal]", "121"}], "||", 
+             RowBox[{"pae", "\[Equal]", "122"}]}], ",", 
+            RowBox[{"(*", 
+             RowBox[{"q80", "-", "q100"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"pi", "=", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"\"\<acoustic_data\>\"", "/.", "dat"}], ")"}], "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"pae", "-", "120", "+", "1"}], ",", "1", ",", "1", 
+                 ",", "1", ",", "1"}], "]"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+               "q10", ",", "q20", ",", "q30", ",", "q40", ",", "q50", ",", 
+                "q60", ",", "q70", ",", "q80", ",", "q90"}], "}"}], "=", 
+              RowBox[{"Quantile", "[", 
+               RowBox[{"pi", ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                 "0.1", ",", "0.2", ",", "0.3", ",", "0.4", ",", "0.5", ",", 
+                  "0.6", ",", "0.7", ",", "0.8", ",", "0.9"}], "}"}]}], 
+               "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"bpi", "=", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ">", "q80"}], ",", "hl", 
+                  ",", 
+                  RowBox[{"1", "-", "hl"}]}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", 
+                  RowBox[{"Length", "[", "pi", "]"}]}], "}"}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"hl", ":", " ", "1"}], "=", 
+                RowBox[{"1", " ", "high"}]}], ",", " ", 
+               RowBox[{"0", "=", 
+                RowBox[{"0", " ", "high"}]}]}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"tab", "=", 
+              RowBox[{"Join", "[", 
+               RowBox[{
+                RowBox[{"Transpose", "[", 
+                 RowBox[{"{", "bpi", "}"}], "]"}], ",", "tab", ",", "2"}], 
+               "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            ",", 
+            RowBox[{
+             RowBox[{"pae", "\[Equal]", "130"}], "||", 
+             RowBox[{"pae", "\[Equal]", "131"}], "||", 
+             RowBox[{"pae", "\[Equal]", "132"}]}], ",", 
+            RowBox[{"(*", 
+             RowBox[{"q0", "-", "q30"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"pi", "=", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"\"\<acoustic_data\>\"", "/.", "dat"}], ")"}], "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"pae", "-", "130", "+", "1"}], ",", "1", ",", "1", 
+                 ",", "1", ",", "1"}], "]"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+               "q10", ",", "q20", ",", "q30", ",", "q40", ",", "q50", ",", 
+                "q60", ",", "q70", ",", "q80", ",", "q90"}], "}"}], "=", 
+              RowBox[{"Quantile", "[", 
+               RowBox[{"pi", ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                 "0.1", ",", "0.2", ",", "0.3", ",", "0.4", ",", "0.5", ",", 
+                  "0.6", ",", "0.7", ",", "0.8", ",", "0.9"}], "}"}]}], 
+               "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"bpi", "=", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "<", "q30"}], ",", "hl", 
+                  ",", 
+                  RowBox[{"1", "-", "hl"}]}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", 
+                  RowBox[{"Length", "[", "pi", "]"}]}], "}"}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"hl", ":", " ", "1"}], "=", 
+                RowBox[{"1", " ", "high"}]}], ",", " ", 
+               RowBox[{"0", "=", 
+                RowBox[{"0", " ", "high"}]}]}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"tab", "=", 
+              RowBox[{"Join", "[", 
+               RowBox[{
+                RowBox[{"Transpose", "[", 
+                 RowBox[{"{", "bpi", "}"}], "]"}], ",", "tab", ",", "2"}], 
+               "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            ",", 
+            RowBox[{
+             RowBox[{"pae", "\[Equal]", "140"}], "||", 
+             RowBox[{"pae", "\[Equal]", "141"}], "||", 
+             RowBox[{"pae", "\[Equal]", "142"}]}], ",", 
+            RowBox[{"(*", 
+             RowBox[{"q35", "-", "q65"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"pi", "=", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"\"\<acoustic_data\>\"", "/.", "dat"}], ")"}], "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"pae", "-", "140", "+", "1"}], ",", "1", ",", "1", 
+                 ",", "1", ",", "1"}], "]"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+               "q10", ",", "q20", ",", "q30", ",", "q35", ",", "q40", ",", 
+                "q50", ",", "q60", ",", "q65", ",", "q70", ",", "q80", ",", 
+                "q90"}], "}"}], "=", 
+              RowBox[{"Quantile", "[", 
+               RowBox[{"pi", ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                 "0.1", ",", "0.2", ",", "0.3", ",", "0.35", ",", "0.4", ",", 
+                  "0.5", ",", "0.6", ",", "0.65", ",", "0.7", ",", "0.8", ",",
+                   "0.9"}], "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"bpi", "=", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ">", "q35"}], "&&", 
+                   RowBox[{
+                    RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "<", "q65"}]}], ",", "hl",
+                   ",", 
+                  RowBox[{"1", "-", "hl"}]}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", 
+                  RowBox[{"Length", "[", "pi", "]"}]}], "}"}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"hl", ":", " ", "1"}], "=", 
+                RowBox[{"1", " ", "high"}]}], ",", " ", 
+               RowBox[{"0", "=", 
+                RowBox[{"0", " ", "high"}]}]}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"tab", "=", 
+              RowBox[{"Join", "[", 
+               RowBox[{
+                RowBox[{"Transpose", "[", 
+                 RowBox[{"{", "bpi", "}"}], "]"}], ",", "tab", ",", "2"}], 
+               "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            ",", 
+            RowBox[{
+             RowBox[{"pae", "\[Equal]", "150"}], "||", 
+             RowBox[{"pae", "\[Equal]", "151"}], "||", 
+             RowBox[{"pae", "\[Equal]", "152"}]}], ",", 
+            RowBox[{"(*", 
+             RowBox[{"q70", "-", "q100"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"pi", "=", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"\"\<acoustic_data\>\"", "/.", "dat"}], ")"}], "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"pae", "-", "150", "+", "1"}], ",", "1", ",", "1", 
+                 ",", "1", ",", "1"}], "]"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+               "q10", ",", "q20", ",", "q30", ",", "q40", ",", "q50", ",", 
+                "q60", ",", "q70", ",", "q80", ",", "q90"}], "}"}], "=", 
+              RowBox[{"Quantile", "[", 
+               RowBox[{"pi", ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                 "0.1", ",", "0.2", ",", "0.3", ",", "0.4", ",", "0.5", ",", 
+                  "0.6", ",", "0.7", ",", "0.8", ",", "0.9"}], "}"}]}], 
+               "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"bpi", "=", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ">", "q70"}], ",", "hl", 
+                  ",", 
+                  RowBox[{"1", "-", "hl"}]}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", 
+                  RowBox[{"Length", "[", "pi", "]"}]}], "}"}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"hl", ":", " ", "1"}], "=", 
+                RowBox[{"1", " ", "high"}]}], ",", " ", 
+               RowBox[{"0", "=", 
+                RowBox[{"0", " ", "high"}]}]}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"tab", "=", 
+              RowBox[{"Join", "[", 
+               RowBox[{
+                RowBox[{"Transpose", "[", 
+                 RowBox[{"{", "bpi", "}"}], "]"}], ",", "tab", ",", "2"}], 
+               "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            ",", 
+            RowBox[{
+             RowBox[{"pae", "\[Equal]", "160"}], "||", 
+             RowBox[{"pae", "\[Equal]", "161"}], "||", 
+             RowBox[{"pae", "\[Equal]", "162"}]}], ",", 
+            RowBox[{"(*", 
+             RowBox[{"q0", "-", "q33"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"pi", "=", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"\"\<acoustic_data\>\"", "/.", "dat"}], ")"}], "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"pae", "-", "160", "+", "1"}], ",", "1", ",", "1", 
+                 ",", "1", ",", "1"}], "]"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"q33", ",", "q66"}], "}"}], "=", 
+              RowBox[{"Quantile", "[", 
+               RowBox[{"pi", ",", 
+                RowBox[{"{", 
+                 RowBox[{"0.3333", ",", "0.6667"}], "}"}]}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"bpi", "=", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "<", "q33"}], ",", "hl", 
+                  ",", 
+                  RowBox[{"1", "-", "hl"}]}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", 
+                  RowBox[{"Length", "[", "pi", "]"}]}], "}"}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"hl", ":", " ", "1"}], "=", 
+                RowBox[{"1", " ", "high"}]}], ",", " ", 
+               RowBox[{"0", "=", 
+                RowBox[{"0", " ", "high"}]}]}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"tab", "=", 
+              RowBox[{"Join", "[", 
+               RowBox[{
+                RowBox[{"Transpose", "[", 
+                 RowBox[{"{", "bpi", "}"}], "]"}], ",", "tab", ",", "2"}], 
+               "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            ",", 
+            RowBox[{
+             RowBox[{"pae", "\[Equal]", "170"}], "||", 
+             RowBox[{"pae", "\[Equal]", "171"}], "||", 
+             RowBox[{"pae", "\[Equal]", "172"}]}], ",", 
+            RowBox[{"(*", 
+             RowBox[{"q33", "-", "q66"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"pi", "=", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"\"\<acoustic_data\>\"", "/.", "dat"}], ")"}], "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"pae", "-", "170", "+", "1"}], ",", "1", ",", "1", 
+                 ",", "1", ",", "1"}], "]"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"q33", ",", "q66"}], "}"}], "=", 
+              RowBox[{"Quantile", "[", 
+               RowBox[{"pi", ",", 
+                RowBox[{"{", 
+                 RowBox[{"0.3333", ",", "0.6667"}], "}"}]}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"bpi", "=", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ">", "q33"}], "&&", 
+                   RowBox[{
+                    RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "<", "q66"}]}], ",", "hl",
+                   ",", 
+                  RowBox[{"1", "-", "hl"}]}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", 
+                  RowBox[{"Length", "[", "pi", "]"}]}], "}"}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"hl", ":", " ", "1"}], "=", 
+                RowBox[{"1", " ", "high"}]}], ",", " ", 
+               RowBox[{"0", "=", 
+                RowBox[{"0", " ", "high"}]}]}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"tab", "=", 
+              RowBox[{"Join", "[", 
+               RowBox[{
+                RowBox[{"Transpose", "[", 
+                 RowBox[{"{", "bpi", "}"}], "]"}], ",", "tab", ",", "2"}], 
+               "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            ",", 
+            RowBox[{
+             RowBox[{"pae", "\[Equal]", "180"}], "||", 
+             RowBox[{"pae", "\[Equal]", "181"}], "||", 
+             RowBox[{"pae", "\[Equal]", "182"}]}], ",", 
+            RowBox[{"(*", 
+             RowBox[{"q66", "-", "q100"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"pi", "=", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"\"\<acoustic_data\>\"", "/.", "dat"}], ")"}], "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"pae", "-", "180", "+", "1"}], ",", "1", ",", "1", 
+                 ",", "1", ",", "1"}], "]"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"q33", ",", "q66"}], "}"}], "=", 
+              RowBox[{"Quantile", "[", 
+               RowBox[{"pi", ",", 
+                RowBox[{"{", 
+                 RowBox[{"0.3333", ",", "0.6667"}], "}"}]}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"bpi", "=", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"pi", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ">", "q66"}], ",", "hl", 
+                  ",", 
+                  RowBox[{"1", "-", "hl"}]}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", 
+                  RowBox[{"Length", "[", "pi", "]"}]}], "}"}]}], "]"}]}], ";", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"hl", ":", " ", "1"}], "=", 
+                RowBox[{"1", " ", "high"}]}], ",", " ", 
+               RowBox[{"0", "=", 
+                RowBox[{"0", " ", "high"}]}]}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"tab", "=", 
+              RowBox[{"Join", "[", 
+               RowBox[{
+                RowBox[{"Transpose", "[", 
+                 RowBox[{"{", "bpi", "}"}], "]"}], ",", "tab", ",", "2"}], 
+               "]"}]}]}]}], "\[IndentingNewLine]", 
+           RowBox[{"(*", 
+            RowBox[{"end", " ", "which"}], "*)"}], "]"}], ";"}]}], 
+        "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{"end", " ", "if"}], "*)"}], "]"}], ";"}], 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", ";", "tab"}]}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.705760747794507*^9, 3.70576074805582*^9}, {
+   3.7057611768343153`*^9, 3.705761240861013*^9}, {3.705761345244742*^9, 
+   3.705761357714244*^9}, {3.7057643229250813`*^9, 3.7057643290733356`*^9}, {
+   3.705764938068817*^9, 3.705764975863319*^9}, 3.70576532153969*^9, 
+   3.7057653565649233`*^9, {3.705765691194128*^9, 3.705765697790968*^9}, {
+   3.7057658075194798`*^9, 3.705765810141283*^9}, {3.713015266398096*^9, 
+   3.71301534565397*^9}, {3.713691444244792*^9, 3.713691444340125*^9}, {
+   3.713691634679304*^9, 3.713691716413809*^9}, {3.71369175608816*^9, 
+   3.7136919089727793`*^9}, {3.7136925045384703`*^9, 3.713692720887453*^9}, {
+   3.7136927559352703`*^9, 3.713692790500402*^9}, {3.7136929971738853`*^9, 
+   3.7136930209165907`*^9}, {3.713834396816765*^9, 3.713834498175722*^9}, {
+   3.715548104456842*^9, 3.715548110485115*^9}, {3.715550048212781*^9, 
+   3.7155500635130663`*^9}, {3.715551258358963*^9, 3.715551558286278*^9}, {
+   3.715551593343581*^9, 3.715551612411433*^9}, {3.7155516477296953`*^9, 
+   3.715551868673029*^9}, {3.71564775168913*^9, 3.7156480450372057`*^9}, {
+   3.722012163662229*^9, 3.722012370052753*^9}, {3.7220128411873407`*^9, 
+   3.722012857588725*^9}, {3.7456778659811068`*^9, 3.7456778900429783`*^9}, 
+   3.74568622487681*^9, 3.745687002673069*^9, 3.745687084500333*^9},
+ ExpressionUUID -> "c0af6c41-6392-4c5e-b927-aeb9025b4d3c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DumpSave", "[", 
+  RowBox[{
+  "\"\<ownCloud/EMORY/bia_j/CODE/scripts/ftab4.mx\>\"", ",", "ftab4"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.705760740320719*^9, 3.705760744034335*^9}, {
+  3.713015269507201*^9, 3.7130152733756104`*^9}, {3.713692748851386*^9, 
+  3.71369275164618*^9}, {3.7138345224801292`*^9, 3.713834539222601*^9}, {
+  3.715551910898349*^9, 3.715551934279934*^9}, {3.71564807072931*^9, 
+  3.715648084909121*^9}, {3.745680132222423*^9, 3.7456801349503117`*^9}},
+ ExpressionUUID -> "8d6cf12b-e80a-4765-b501-b3e2fca31874"],
+
+Cell[BoxData[
+ RowBox[{"{", "ftab4", "}"}]], "Output",
+ CellChangeTimes->{
+  3.7057649989409*^9, 3.705765325595379*^9, 3.705765395591425*^9, {
+   3.705765701449029*^9, 3.705765718356475*^9}, 3.705765813805396*^9, 
+   3.7130153541963453`*^9, 3.7136928497718897`*^9, 3.713693027684719*^9, 
+   3.713834527104558*^9, 3.71555187912803*^9, 3.715551928836425*^9, {
+   3.715648064702634*^9, 3.7156480873666677`*^9}, 3.72201238456444*^9, 
+   3.722012864600368*^9, 3.72201307633784*^9, 3.72201369939958*^9, 
+   3.730482375532178*^9, 3.74568015036913*^9, 3.745687105212153*^9, 
+   3.745687546787451*^9},
+ ExpressionUUID -> "7ff84a20-9704-436f-8167-eebb93b53436"]
+}, Open  ]]
+},
+WindowSize->{1215, 706},
+WindowMargins->{{-10, Automatic}, {Automatic, -8}},
+FrontEndVersion->"10.0 for Linux x86 (64-bit) (June 27, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 53460, 1239, 3487, "Input"],
+Cell[CellGroupData[{
+Cell[54043, 1263, 560, 10, 32, "Input"],
+Cell[54606, 1275, 651, 11, 65, "Output"]
+}, Open  ]]
+}
+]
+*)
+
