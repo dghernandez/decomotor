@@ -34,6 +34,13 @@ math -script main_data.m
 ```
 This program generates as output several files in the "resdump/" folder with details of the codewords found.
 
+We have also included a program for testing the method on synthetic data (as described in the appendix of the paper).
+Go to the folder "main/", and run (or open it with Mathematica and run it from there):
+
+```
+math -script main_synthetic.m
+```
+This program generates as output the performance of the method and append the result to a file in the "resdump/res_synth/" folder. Within this program, there are options to generate samples from different distributions.
 
 ## Contributing
 
