@@ -461,6 +461,71 @@ signlevellower4[mat_, iopt_, nmix_: 100, ne_: 20, hcutoff_: 1,
 
 (*kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk*)
 (*kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk*)
+
+(*needs previous functions: h0goopatt, couplings, margmagn*)
+(*gets \
+significance level from reshuffling data*)
+
+signlevel[mat_, iopt_, nmix_: 5, ne_: 20, hcutoff_: 1, Nmax_: 10000, 
+   emax_: 1.] := 
+  Block[{mc1 = 0., mc2 = 0., mc3 = 0., mc5 = 0., mc10 = 0., M, T, p, 
+    matr, h1r, Nm1r, hefr, Jvwr, mir, h1efr},
+   T = Dimensions[mat][[2]];
+   M = Length[mat];
+   p = 1. Total[mat]/M;
+   
+   Do[
+    matr = Transpose[Table[RandomSample[mat[[All, j]]], {j, T}]];
+    h1r = h0goodpatt2[matr, hcutoff, Nmax];(*{h,n,pM,z,+-1,patt}*)
+   
+     Nm1r = Length[h1r];
+    {hefr, Jvwr} = 
+     couplings[h1r, p];(*h from couplings and couplings Jvw*)(* 
+    Bottleneck ~
+    25min *)
+    {mir, h1efr} = 
+     margmagn[M, h1r, hefr, Jvwr, emax, 
+      ne];(*marginal magnetizetion and e-correction to fields*)
+    
+    mc1 += RankedMax[mir[[All, iopt]], 1];
+    mc2 += RankedMax[mir[[All, iopt]], 2];
+    mc3 += RankedMax[mir[[All, iopt]], 3];
+    mc5 += RankedMax[mir[[All, iopt]], 5];
+    mc10 += RankedMax[mir[[All, iopt]], 10];
+    (*mc1p+=RankedMax[mir[[All,iopt]],Quotient[Nm1r,
+    100]];*)
+    , {ss, nmix}];
+   
+   mc1 = mc1/nmix;
+   mc2 = mc2/nmix;
+   mc3 = mc3/nmix;
+   mc5 = mc5/nmix;
+   mc10 = mc10/nmix;
+   (*mc1p=mc1p/nmix;*)
+   
+   {mc1, mc2, mc3, mc5, mc10}];
+
+(*kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk*)
+(*kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk*)
+
+(*Needs similar*)
+(*Counting the number of true patt detected, and \
+similar patt detected*)
+
+truesimdetected[orig_, guess_] := 
+  Block[{res, td = 0, no = Length[orig], nd = Length[guess], aux, 
+    ptruelist = {}, at, as},
+   If[nd == 0,
+    res = {{0, 0, no}, 0, 1, {}},
+    
+    Map[If[MemberQ[orig, #], td += 1; 
+       ptruelist = ptruelist~Join~{#}] &, guess];
+    res = {{td, nd, no}, 1. td/no, 1. td/nd, 
+      Sort @(Tally @ (Length /@ ptruelist))};
+    
+    ];
+   res];
+
 (*kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk*)
 (*kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk*)
 (*exporting functions as mx*)
@@ -472,7 +537,8 @@ DumpSave[dirscripts<>"couplings.mx", couplings]
 DumpSave[dirscripts<>"margmagn.mx", margmagn]
 DumpSave[dirscripts<>"epsilonopt.mx", epsilonopt]
 DumpSave[dirscripts<>"signlevellower4.mx", signlevellower4]
-
+DumpSave[dirscripts<>"signlevel.mx", signlevel]
+DumpSave[dirscripts<>"truesimdetected.mx", truesimdetected]
 
 
 
