@@ -12,10 +12,6 @@ Tha main code of this project is written in Mathematica v10 (and tested on v11, 
 
 The repository will also contain a demo in a jupyter notebook (python) --coming soon.
 
-```
-Give examples
-```
-
 ### Installing
 
 The mx files for the functions can work directly. If they do not work, you will need to create the scripts in our local Mathematica, in order to be sure that they will run properly. Go to the folder "src_fun/" and from there run the following command (or open it with Mathematica and run it from there):
