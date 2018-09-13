@@ -10,7 +10,7 @@ The code in this repository follows a method for decoding neural activity in rel
 
 Tha main code of this project is written in Mathematica v10 (and tested on v11, as well).
 
-The repository also contains a demo in a jupyter notebook (python).
+The repository will also contain a demo in a jupyter notebook (python) --coming soon.
 
 ```
 Give examples
