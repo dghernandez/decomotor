@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      7537,        197]
-NotebookOptionsPosition[      7194,        180]
-NotebookOutlinePosition[      7528,        195]
-CellTagsIndexPosition[      7485,        192]
+NotebookDataLength[      8023,        202]
+NotebookOptionsPosition[      7515,        185]
+NotebookOutlinePosition[      7849,        200]
+CellTagsIndexPosition[      7806,        197]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -30,7 +30,7 @@ Cell[BoxData[
   RowBox[{
    RowBox[{
     RowBox[{"couplings", "[", 
-     RowBox[{"h1_", ",", "p_"}], "]"}], ":=", 
+     RowBox[{"h1_", ",", "p_", ",", "M_"}], "]"}], ":=", 
     RowBox[{"Block", "[", 
      RowBox[{
       RowBox[{"{", 
@@ -159,7 +159,9 @@ Cell[BoxData[
         RowBox[{"reshef", ",", "resJ"}], "}"}]}]}], "]"}]}], ";"}]}]], "Input",\
 
  CellChangeTimes->{{3.685031724042542*^9, 3.685031954533037*^9}, {
-  3.68503220391358*^9, 3.6850323341410418`*^9}}],
+  3.68503220391358*^9, 3.6850323341410418`*^9}, {3.746370132027933*^9, 
+  3.746370133799204*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"98920712-1b75-4c5b-b3d0-a469958cdf4f"],
 
 Cell[CellGroupData[{
 
@@ -170,17 +172,20 @@ Cell[BoxData[
    "couplings"}], "]"}]], "Input",
  CellChangeTimes->{{3.685032349036007*^9, 3.685032380756839*^9}, 
    3.685468538841365*^9, 3.69937504083784*^9, {3.74568111441567*^9, 
-   3.745681116695388*^9}}],
+   3.745681116695388*^9}},
+ CellLabel->"In[2]:=",ExpressionUUID->"519b0a09-61f2-4b16-bed5-0d455145c412"],
 
 Cell[BoxData[
  RowBox[{"{", "couplings", "}"}]], "Output",
  CellChangeTimes->{3.6850323877819653`*^9, 3.685468540464979*^9, 
-  3.699375041952531*^9, 3.7304824315247393`*^9, 3.745681118100732*^9}]
+  3.699375041952531*^9, 3.7304824315247393`*^9, 3.745681118100732*^9, 
+  3.7463701415373087`*^9},
+ CellLabel->"Out[2]=",ExpressionUUID->"3a8d4822-a013-4de7-83f0-e42eefea2ab5"]
 }, Open  ]]
 },
 WindowSize->{1853, 1025},
-WindowMargins->{{0, Automatic}, {Automatic, 0}},
-FrontEndVersion->"10.0 for Linux x86 (64-bit) (June 27, 2014)",
+WindowMargins->{{0, Automatic}, {0, Automatic}},
+FrontEndVersion->"11.3 for Linux x86 (64-bit) (March 6, 2018)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -194,10 +199,10 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 6083, 141, 611, "Input"],
+Cell[558, 20, 6221, 143, 662, "Input",ExpressionUUID->"98920712-1b75-4c5b-b3d0-a469958cdf4f"],
 Cell[CellGroupData[{
-Cell[6666, 165, 314, 7, 32, "Input"],
-Cell[6983, 174, 195, 3, 65, "Output"]
+Cell[6804, 167, 392, 8, 31, "Input",ExpressionUUID->"519b0a09-61f2-4b16-bed5-0d455145c412"],
+Cell[7199, 177, 300, 5, 68, "Output",ExpressionUUID->"3a8d4822-a013-4de7-83f0-e42eefea2ab5"]
 }, Open  ]]
 }
 ]
