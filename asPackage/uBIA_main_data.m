@@ -1,6 +1,7 @@
 (* ::Package:: *)
 
-SetDirectory["./"]
+SetDirectory["~/Documents/decomotor-master/main/"];
+(*SetDirectory["./"];*)
 
 
 dirscr = "../scripts/";
