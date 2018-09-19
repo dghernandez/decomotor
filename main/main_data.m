@@ -60,7 +60,7 @@ Do[
   Nm1 = Length[h1];
   
   (*h_effective coming from couplings and couplings Jvw themselves*)(*Bottleneck in time ~mins*)
-  {hef, Jvw} = couplings[h1, p];
+  {hef, Jvw} = couplings[h1, p, M];
   
   (*marginal magnetizetion and e-correction to fields*)
   {mi, h1ef} = margmagn[M, h1, hef, Jvw];
