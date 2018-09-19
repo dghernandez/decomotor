@@ -14,6 +14,19 @@ The repository will also contain a demo in a jupyter notebook (python) --coming 
 
 ### Installing
 
+#### As a Mathematica Package (recommended)
+
+Place the file "asPackage/uBIAmotor.m" in your Package folder (see $Path variable). Then from any notebook where you will need the package, just type:
+```
+<<uBIAmotor`
+```
+or 
+```
+Needs["uBIAmotor`"]
+```
+
+#### Through the command line
+
 The mx files for the functions can work directly. If they do not work, you will need to create the scripts in our local Mathematica, in order to be sure that they will run properly. Go to the folder "src_fun/" and from there run the following command (or open it with Mathematica and run it from there):
 ```
 math -script create_all_functions.m
