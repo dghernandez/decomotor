@@ -14,7 +14,7 @@ The repository will also contain a demo in a jupyter notebook (python) --coming 
 
 ### Installing
 
-#### As a Mathematica Package (recommended)
+#### As a Mathematica Package
 
 Place the file "asPackage/uBIAmotor.m" in your Package folder (see $Path variable). Then from any notebook where you need the package, just type:
 ```
@@ -25,21 +25,12 @@ or
 Needs["uBIAmotor`"]
 ```
 
-#### Through the command line
-
-The mx files for the functions can work directly. If they do not work, you will need to create the scripts in our local Mathematica, in order to be sure that they will run properly. Go to the folder "src_fun/" and from there run the following command (or open it with Mathematica and run it from there):
-```
-math -script create_all_functions.m
-```
-
-This command creates the functions that are needed by the main programs. Also, there are notebooks for each function showing their contents.
-
 ## Decoding a dictionary
 
 First, we run the analysis over two dataset, located in the "dataset/" folder. These contain the spiketrains and different behavioral features (such as pitch, amplitude, spectral entropy) for two neurons in the same songbird. The following program will transform these data into binary matrices, and then it will run the method over them to find relevant words (with and without the behavioral output). Go to the folder "main/", and run (or open it with Mathematica and run it from there):
 
 ```
-math -script main_data.m
+math -script uBIA_main_data.m
 ```
 This program generates as output several files in the "resdump/" folder with details of the codewords found.
 
@@ -47,7 +38,7 @@ We have also included a program for testing the method on synthetic data (as des
 Go to the folder "main/", and run (or open it with Mathematica and run it from there):
 
 ```
-math -script main_synthetic.m
+math -script uBIA_main_synthetic.m
 ```
 This program generates as output the performance of the method and append the result to a file in the "resdump/res_synth/" folder. Within this program, there are options to generate samples from different distributions.
 
