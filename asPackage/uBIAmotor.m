@@ -15,6 +15,7 @@ margmagn::usage = "margmagn[M, h1, hef, Jvw, emax: 1., ne: 20] .mi: marginal mag
 epsilonopt::usage = "epsilonopt[h0v, h1ef, M, emax: 1, ne: 20] finds the limit(column of mi) of the taylor approximation in epsilon. Criteria is Mean|h0|~Mean|h(epsilon)|.";
 signlevellower4::usage = "signlevellower4[mat, iopt, nmix: 100, ne: 20, hcutoff: 1, Nmax: 10000, emax: 1.] gets significance level from reshuffling data. Needs previous functions: h0goopatt, couplings, margmagn.";
 truesimdetected::usage = "truesimdetected[orig_, guess_] counts the number of true patt detected.";
+signlevel::usage = "signlevel[mat_, iopt_, nmix_: 5, ne_: 20, hcutoff_: 1, Nmax_: 10000, emax_: 1.] gets significance level from reshuffling data.";
 
 
 
