@@ -63,7 +63,7 @@ pJs[T_, h_, Jh_] :=
         Length[Jh]}] &, e0]];
 
 (*RUNNING*)
-ParallelDo[
+(*Parallel*)Do[
  
 Ncon2=Round[1. alfa T /9];
 

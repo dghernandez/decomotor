@@ -38,7 +38,7 @@ nmix = 10;(*numbers of reshuffling, to get magnetization m(n_f) at a certain ful
 
 (*RUNNING*)
 Do[
- ParallelDo[(*to run over available cores*)
+ (*Parallel*)Do[(*to run over available cores*)
 
   (*getting matrix behavior+spikes from spikes time and continuos behavior data (1st column behavior, and the rest time bins)*)
   hl=1;
