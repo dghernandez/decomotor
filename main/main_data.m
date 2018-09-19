@@ -1,7 +1,7 @@
 (* ::Package:: *)
 
 (*LOADING FUNCTIONS*)
-SetDirectory["~/ownCloud/EMORY/bia_j/CODE/main/"]
+SetDirectory["./"]
 (*biadir = "ownCloud/EMORY/";*)
 
 dirscr = "../scripts/";(*biadir<>"bia_j/CODE/scripts/";*)
@@ -26,7 +26,7 @@ idname = "test"; (*name for files*)
 dirres = "../resdump/";(*biadir <> "bia_j/CODE/resdump/";*)(*Nmax=500; hcutoof=0.01*)
 (*to print file names later*)
 beh = Association[0 -> "Pitch", 1 -> "Amplitude", 2 -> "Entropy"];
-listf = Import[(*biadir <> "bia_j/CODE*)"../dataset/list_files.txt", "Table"] // Flatten;
+listf = Import["../dataset/list_files.txt", "Table"] // Flatten;
 
 (*PARAMETERS*)
 numfiles=2;(*number of files in mat format to run the analysis, located in /dataset/ and listed in /dataset/list_files.txt*)
@@ -42,7 +42,7 @@ Do[
 
   (*getting matrix behavior+spikes from spikes time and continuos behavior data (1st column behavior, and the rest time bins)*)
   hl=1;
-  mat = ftab4[a, pae, hl,(* biadir <> "bia_j/CODE*)"../dataset/"];(*coding above median behavior=hl=1 and 0 otherwise*)
+  mat = ftab4[a, pae, hl,"../dataset/"];(*coding above median behavior=hl=1 and 0 otherwise*)
   (*mat: this is a matrix (M x T) of binary variables*)
 
   (*number of samples*)

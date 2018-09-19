@@ -8,7 +8,7 @@ id=601;(*number for files*)
 (*id=502, 504, 506,  normal distr with sig=0.5*)
 
 (*LOADING FUNCTIONS*)
-SetDirectory["~/ownCloud/EMORY/bia_j/CODE/main/"];
+SetDirectory["./"];
 
 dirscr = "../scripts/";
 
