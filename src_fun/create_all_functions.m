@@ -315,7 +315,7 @@ h0goodpatt2[tab_, hcutoff_: 0.01, Nmax_: 1000, sfiltroh_: 1] :=
 (*kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk*)
 
 (*returns h extra coming from couplings (sum_w Jvw) and the couplings Jvw*)
-couplings[h1_, p_] := 
+couplings[h1_, p_, M_] := 
   Block[{resJ, reshef, tv, tw, Iv, Uv, hh = 0., j1, Nm1, pv, pw, pu, 
     pin},
    Nm1 = Length @h1;
@@ -429,7 +429,7 @@ signlevellower4[mat_, iopt_, nmix_: 100, ne_: 20, hcutoff_: 1,
    
    Nm1r = Length[h1r];
    {hefr, Jvwr} = 
-    couplings[h1r, p];(*h from couplings and couplings Jvw*)(* 
+    couplings[h1r, p, M];(*h from couplings and couplings Jvw*)(* 
    Bottleneck ~
    25min *)
    {mir, h1efr} = 
@@ -480,7 +480,7 @@ signlevel[mat_, iopt_, nmix_: 5, ne_: 20, hcutoff_: 1, Nmax_: 10000,
    
      Nm1r = Length[h1r];
     {hefr, Jvwr} = 
-     couplings[h1r, p];(*h from couplings and couplings Jvw*)(* 
+     couplings[h1r, p, M];(*h from couplings and couplings Jvw*)(* 
     Bottleneck ~
     25min *)
     {mir, h1efr} = 
