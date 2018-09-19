@@ -3,14 +3,14 @@
 (*to create scripts in local system*)
 
 (*edit this to the path of your own scripts directoy*)
-SetDirectory["~/ownCloud/EMORY/bia_j/CODE/src_fun/"]
-dirscripts = (*"ownCloud/EMORY/bia_j/CODE*)"../scripts/";
+SetDirectory["./"]
+dirscripts = "../scripts/";
 
 (*kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk*)
 (*kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk*)
 
 ftab4[a_, pae_: 0, hl_: 1, 
-   dir_: "ownCloud/EMORY/bia_j/CODE/dataset/"] := 
+   dir_: "../dataset/"] := 
   Block[{tab, T0, T, lis, v1, st, dat, sdat, pi, mpi, bpi, M, q10, 
     q20, q30, q40, q50, q60, q70, q80, q90, q35, q65, q33, q66},
    T0 = 40; T = 21;
