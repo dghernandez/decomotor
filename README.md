@@ -14,7 +14,7 @@ The repository will also contain a demo in a jupyter notebook (python) --coming 
 
 ### Installing
 
-#### As a Mathematica Package (recommended)
+#### As a Mathematica Package
 
 Place the file "asPackage/uBIAmotor.m" in your Package folder (see $Path variable). Then from any notebook where you need the package, just type:
 ```
