@@ -95,7 +95,7 @@ dat0 = RandomChoice[pp -> e0, Mtot];
   h1 = h0goodpatt2[mat,hcutoff,Nmax];(*{h,n,pM,z,+-1,patt}*)
   Nm1 = Length[h1];
   (*Print[{alfa,arch,M,Nm1}];*)
-  {hef, Jvw} = couplings[h1, p];(*//AbsoluteTiming*)(*h from couplings and couplings Jvw*)(*Bottleneck ~25min *)
+  {hef, Jvw} = couplings[h1, p, M];(*//AbsoluteTiming*)(*h from couplings and couplings Jvw*)(*Bottleneck ~25min *)
   {mi, h1ef} = margmagn[M, h1, hef, Jvw,emax,ne];(*marginal magnetizetion and e-correction to fields*)
   
   iopt = epsilonopt[h1[[All, 1]], h1ef, M,emax,ne];(*limit to taylor serie Mean|h0|~Mean|h(e)|*)
