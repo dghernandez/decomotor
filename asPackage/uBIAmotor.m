@@ -10,7 +10,7 @@ ClearAll["uBIAmotor`*", "uBIAmotor`Private`*"];
 ftab4::usage = "ftab4[numberfile, vocal_feature, hl:1] extracts a matrix from files in list_files.txt, corresponding to spikes and behavior.";
 mayzero::usage = "mayzero[tab] inverts 1->0 (from column 2 to last) if 1 is more likely.";
 h0goodpatt2::usage = "h0goodpatt2[tab, hcutoff: 0.01, Nmax: 1000, sfiltroh: 1], function that taking data matrix, extracts all patterns to be analyzed with their occurrences, under some specific criteria and return {h0,nn,ppM,zz,+-1,patt}.";
-couplings::usage = "couplings[h1, p] returns the couplings Jvw and h extra coming from couplings (sum_w Jvw)." ;
+couplings::usage = "couplings[h1, p, M] returns the couplings Jvw and h extra coming from couplings (sum_w Jvw)." ;
 margmagn::usage = "margmagn[M, h1, hef, Jvw, emax: 1., ne: 20] .mi: marginal magnetization as a function of epsilon; h1ef: epsilon correction to h0 as a function of epsilon (to later decide eopt as Mean[|h0|]~Mean[|h1ef|]).";
 epsilonopt::usage = "epsilonopt[h0v, h1ef, M, emax: 1, ne: 20] finds the limit(column of mi) of the taylor approximation in epsilon. Criteria is Mean|h0|~Mean|h(epsilon)|.";
 signlevellower4::usage = "signlevellower4[mat, iopt, nmix: 100, ne: 20, hcutoff: 1, Nmax: 10000, emax: 1.] gets significance level from reshuffling data. Needs previous functions: h0goopatt, couplings, margmagn.";
@@ -227,15 +227,15 @@ h0goodpatt2[tab_, hcutoff_: 0.01, Nmax_: 1000, sfiltroh_: 1] :=
    res = Sort[res, Abs[#1[[1]]] > Abs[#2[[1]]] &];
    (*res=Sort[res,#1[[1]]>#2[[1]]&];*)(* esta parece ser mejor, en combinacion con Nmax~10^3 *)
    
-   If[Length[res] > Nmax, res = res[[1 ;; Nmax]]];; 
+   If[Length[res] > Nmax, res = res[[1 ;; Nmax]]];
    res];
 
 (*kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk*)
 (*kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk*)
 
 (*returns h extra coming from couplings (sum_w Jvw) and the couplings Jvw*)
-couplings[h1_, p_] := Block[{resJ, reshef, tv, tw, Iv, Uv, hh = 0., j1, Nm1, pv, pw, pu, pin},
-   Nm1 = Length @h1;
+couplings[h1_, p_, M_] := Block[{resJ, reshef, tv, tw, Iv, Uv, hh = 0., j1, Nm1, pv, pw, pu, pin},
+   Nm1 = Length@h1;
    reshef = ConstantArray[0, Nm1];
    j1 = Reap[Do[
        	tv = h1[[v, 6]];
@@ -333,7 +333,7 @@ signlevellower4[mat_, iopt_, nmix_: 100, ne_: 20, hcutoff_: 1, Nmax_: 10000, ema
    h1r = h0goodpatt2[matr, hcutoff, Nmax];(*{h,n,pM,z,+-1,patt}*)
    
    Nm1r = Length[h1r];
-   {hefr, Jvwr} = couplings[h1r, p];(*h from couplings and couplings Jvw*)(* Bottleneck ~ 25min *)
+   {hefr, Jvwr} = couplings[h1r, p, M];(*h from couplings and couplings Jvw*)(* Bottleneck ~ 25min *)
    {mir, h1efr} = margmagn[M, h1r, hefr, Jvwr, emax];(*marginal magnetizetion and e-correction to fields*)
    
    mlist = mlist~Join~Sort[mir[[All, iopt]], Greater][[;; Min[nmix, Length@mir]]];
@@ -375,22 +375,16 @@ signlevel[mat_, iopt_, nmix_: 5, ne_: 20, hcutoff_: 1, Nmax_: 10000,
     matr = Transpose[Table[RandomSample[mat[[All, j]]], {j, T}]];
     h1r = h0goodpatt2[matr, hcutoff, Nmax];(*{h,n,pM,z,+-1,patt}*)
    
-     Nm1r = Length[h1r];
-    {hefr, Jvwr} = 
-     couplings[h1r, p];(*h from couplings and couplings Jvw*)(* 
-    Bottleneck ~
-    25min *)
-    {mir, h1efr} = 
-     margmagn[M, h1r, hefr, Jvwr, emax, 
-      ne];(*marginal magnetizetion and e-correction to fields*)
+    Nm1r = Length[h1r];
+    {hefr, Jvwr} = couplings[h1r, p, M];(*h from couplings and couplings Jvw*)(* Bottleneck ~25min *)
+    {mir, h1efr} = margmagn[M, h1r, hefr, Jvwr, emax, ne];(*marginal magnetizetion and e-correction to fields*)
     
     mc1 += RankedMax[mir[[All, iopt]], 1];
     mc2 += RankedMax[mir[[All, iopt]], 2];
     mc3 += RankedMax[mir[[All, iopt]], 3];
     mc5 += RankedMax[mir[[All, iopt]], 5];
     mc10 += RankedMax[mir[[All, iopt]], 10];
-    (*mc1p+=RankedMax[mir[[All,iopt]],Quotient[Nm1r,
-    100]];*)
+    (*mc1p+=RankedMax[mir[[All,iopt]],Quotient[Nm1r,100]];*)
     , {ss, nmix}];
    
    mc1 = mc1/nmix;
