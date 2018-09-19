@@ -1,16 +1,16 @@
 (* ::Package:: *)
 
 
-SetDirectory["~/ownCloud/EMORY/bia_j/CODE/main/"]
+SetDirectory["./"]
 
 
-dirscr = "../scripts/";(*biadir<>"bia_j/CODE/scripts/";*)
+dirscr = "../scripts/";
 
 <<uBIAmotor`; (*------------------------LOADING FUNCTIONS------------------------*)
 
 (*Dumping RESULTS somewhere*)
 idname = "test"; (*name for files*)
-dirres = "../resdump/";(*biadir <> "bia_j/CODE/resdump/";*)(*Nmax=500; hcutoof=0.01*)
+dirres = "../resdump/";(*Nmax=500; hcutoof=0.01*)
 (*to print file names later*)
 beh = Association[0 -> "Pitch", 1 -> "Amplitude", 2 -> "Entropy"];
 listf = Import["../dataset/list_files.txt", "Table"] // Flatten;
