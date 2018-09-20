@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(*to create scripts in local system*)
+(*to create scripts in local system without using Package "uBIAmotor`"*)
 
 (*edit this to the path of your own scripts directoy*)
 SetDirectory["./"]
