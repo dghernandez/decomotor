@@ -1,1 +1,0 @@
-Here we have the code formatted as a Mathematica package.
