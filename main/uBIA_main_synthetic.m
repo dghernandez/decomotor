@@ -8,8 +8,8 @@ id=601;(*number for files*)
 (*id=502, 504, 506,  normal distr with sig=0.5*)
 
 (*LOADING FUNCTIONS*)
-SetDirectory["~/Documents/decomotor-master/main/"];
-(*SetDirectory["./"];*)
+(*SetDirectory["~/Documents/decomotor-master/main/"];*)
+SetDirectory["./"];
 
 dirscr = "../scripts/";
 
