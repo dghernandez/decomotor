@@ -40,9 +40,9 @@ math -script uBIA_main_synthetic.m
 ```
 This program generates as output the performance of the method and append the result to a file in the "resdump/res_synth/" folder. Within this program, there are options to generate samples from different distributions.
 
-[//]: ## Contributing
+[//]: "## Contributing"
 
-[//]: Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+[//]: "Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us."
 
 ## License
 
