@@ -1,4 +1,4 @@
-# decomotor
+# uBIA
 Unsupervised Bayesian Ising Approximation (uBIA) for decoding neural-motor dictionaries. Here we present the code corresponding to the paper:
 <-to be completed->
 
