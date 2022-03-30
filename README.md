@@ -1,6 +1,6 @@
 # uBIA
 Unsupervised Bayesian Ising Approximation (uBIA) for decoding neural activity and other biological dictionaries. Here we present the code corresponding to the paper:
-<-to be completed->
+https://elifesciences.org/articles/68192
 
 The code in this repository follows a method for decoding neural activity in relation to motor behavior, expanding on the approach BIA by Fisher and Mehta (2015).
 
